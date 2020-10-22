@@ -1,0 +1,2 @@
+# SoftDsgnPractice
+Javaでクライアントサーバシステムの構築.
