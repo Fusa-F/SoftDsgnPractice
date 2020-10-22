@@ -12,6 +12,7 @@ public class SimpleHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         count = count + 1;
+        printRequest(exchange);
         String response = count + "回目のアクセスです!";
         Headers headers = exchange.getResponseHeaders();
 
@@ -21,5 +22,19 @@ public class SimpleHandler implements HttpHandler {
         try(OutputStream os = exchange.getResponseBody()) {
             os.write(response.getBytes());
         }
+    }
+
+    private void printRequest(HttpExchange exchange) {
+        System.out.printf("Request Message %d ------------", count);
+
+        String method = exchange.getRequestMethod();
+        System.out.println("Method:" + method);
+
+        String uri = exchange.getRequestURI().toString();
+        System.out.println("URI:" + uri);
+
+        System.out.println("Headers:");
+        Headers headers = exchange.getRequestHeaders();
+        headers.entrySet().forEach(System.out::println);
     }
 }

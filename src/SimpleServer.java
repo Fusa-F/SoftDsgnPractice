@@ -10,7 +10,9 @@ public class SimpleServer {
             InetSocketAddress address = new InetSocketAddress(8080);
             HttpServer httpServer = HttpServer.create(address, 0);
             SimpleHandler simpleHandler = new SimpleHandler();
+            OmikujiHandler omikujiHandler = new OmikujiHandler();
             httpServer.createContext("/hello", simpleHandler);
+            httpServer.createContext("/omikuji", omikujiHandler);
             httpServer.start();
             System.out.println("Server is started!");
         } catch(IOException e) {
